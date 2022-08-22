@@ -1,5 +1,7 @@
-const PRODUCT_NOT_FOUND = 'Product not found';
+const errorMessages = {
+  PRODUCT_NOT_FOUND: 'Product not found',
+};
 
 module.exports = {
-  PRODUCT_NOT_FOUND,
+  errorMessages,
 };
