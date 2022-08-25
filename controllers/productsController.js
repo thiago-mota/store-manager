@@ -1,7 +1,7 @@
 const productsService = require('../services/productsService');
 const { statusMessages } = require('../helpers/messages/statusMessages');
 
-const getAllProducts = async (request, response) => {
+const getAllProducts = async (_request, response) => {
   const result = await productsService.getAllProducts();
 
   response
@@ -9,4 +9,12 @@ const getAllProducts = async (request, response) => {
     .json(result);
 };
 
-module.exports = { getAllProducts };
+const getProductById = async (_request, response) => {
+  const result = await productsService.getProductById();
+
+  response
+    .status(statusMessages.OK)
+    .json(result);
+};
+
+module.exports = { getAllProducts, getProductById };
