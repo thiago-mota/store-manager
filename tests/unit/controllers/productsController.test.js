@@ -16,8 +16,9 @@ describe('getAllProducts Controller', () => {
 
       response.status = sinon.stub().returns(response);
       response.json = sinon.stub().returns();
-      const resultExecute = [];
-      sinon.stub(productsService, 'getAllProducts').resolves(resultExecute);
+      const result = [];
+
+      sinon.stub(productsService, 'getAllProducts').resolves(result);
 
       await productsController.getAllProducts(request, response);
 
@@ -26,23 +27,23 @@ describe('getAllProducts Controller', () => {
       expect(response.status.calledOnce).to.be.true;
     });
 
-    it('Retorna array preenchido', async function () {
+    it('Retorna array com produtos', async function () {
       const request = {};
       const response = {};
 
       response.status = sinon.stub().returns(response);
       response.json = sinon.stub().returns();
-      const resultExecute = {
+      const resultMock = {
         "id": 1,
         "name": "Martelo de Thor",
       };
       
-      sinon.stub(productsService, 'getAllProducts').resolves(resultExecute);
+      sinon.stub(productsService, 'getAllProducts').resolves(resultMock);
 
       await productsController.getAllProducts(request, response);
 
       expect(response.status.calledWith(200)).to.be.equal(true);
-      expect(response.json.calledWith(resultExecute)).to.be.equal(true);
+      expect(response.json.calledWith(result)).to.be.equal(true);
       expect(response.status.calledOnce).to.be.true;
     });
   });
