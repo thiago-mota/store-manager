@@ -43,7 +43,7 @@ describe('getAllProducts Controller', () => {
       await productsController.getAllProducts(request, response);
 
       expect(response.status.calledWith(200)).to.be.equal(true);
-      expect(response.json.calledWith(result)).to.be.equal(true);
+      expect(response.json.calledWith(resultMock)).to.be.equal(true);
       expect(response.status.calledOnce).to.be.true;
     });
   });
