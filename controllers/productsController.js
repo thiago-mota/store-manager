@@ -4,15 +4,20 @@ const { statusMessages } = require('../helpers/messages/statusMessages');
 const getAllProducts = async (_request, response) => {
   const result = await productsService.getAllProducts();
 
-  response
+  return response
     .status(statusMessages.OK)
     .json(result);
 };
 
-const getProductById = async (_request, response) => {
-  const result = await productsService.getProductById();
+const getProductById = async (request, response) => {
+  const { id } = request.params;
+  const result = await productsService.getProductById(id);
 
-  response
+  if (!result) {
+    return response.status(404).json({ message: 'Product not found' });
+  }
+
+  return response
     .status(statusMessages.OK)
     .json(result);
 };
