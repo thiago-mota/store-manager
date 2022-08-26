@@ -50,17 +50,6 @@ describe('getProductsByID Model', () => {
     expect(result).to.be.a('object')
   });
 
-  // it('O objeto contém um único item', async () => {
-  //   sinon.stub(connection, 'execute').resolves(getProductByIdMock);
-  //   const result = await productsModel.getProductById(1);
-  //   expect(result).to.have.lengthOf(1);
-  // });
-
-  // it('O objeto contém itens do tipo objeto', async () => {
-  //   const [result] = await productsModel.getProductById(1);
-  //   expect(result).to.be.an('object');
-  // });
-
   it('O objeto retornado contém informações sobre os produtos', async () => {
     const result = await productsModel.getProductById(1);
     expect(result).to.haveOwnProperty('id');

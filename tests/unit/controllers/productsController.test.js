@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { describe } = require('mocha');
-const Sinon = require('sinon');
+const sinon = require('sinon');
 
 const productsService = require('../../../services/productsService');
 const productsController = require('../../../controllers/productsController');
@@ -8,16 +8,16 @@ const productsController = require('../../../controllers/productsController');
 describe('getAllProducts Controller', () => {
   describe('Caso OK', () => {
     afterEach(() => {
-      Sinon.restore();
+      sinon.restore();
     });
-    it('retorna array vazio', async function () {
+    it('Retorna array vazio', async function () {
       const request = {};
       const response = {};
 
-      response.status = Sinon.stub().returns(response);
-      response.json = Sinon.stub().returns();
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
       const resultExecute = [];
-      Sinon.stub(productsService, 'getAllProducts').resolves(resultExecute);
+      sinon.stub(productsService, 'getAllProducts').resolves(resultExecute);
 
       await productsController.getAllProducts(request, response);
 
@@ -26,18 +26,18 @@ describe('getAllProducts Controller', () => {
       expect(response.status.calledOnce).to.be.true;
     });
 
-    it('retorna array cheio', async function () {
+    it('Retorna array preenchido', async function () {
       const request = {};
       const response = {};
 
-      response.status = Sinon.stub().returns(response);
-      response.json = Sinon.stub().returns();
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
       const resultExecute = {
         "id": 1,
         "name": "Martelo de Thor",
       };
       
-      Sinon.stub(productsService, 'getAllProducts').resolves(resultExecute);
+      sinon.stub(productsService, 'getAllProducts').resolves(resultExecute);
 
       await productsController.getAllProducts(request, response);
 
