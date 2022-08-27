@@ -56,3 +56,23 @@ describe('getProductsByID Model', () => {
     expect(result).to.haveOwnProperty('name');
   });
 });
+
+describe('registerNewProduct Model', () => {
+  const registerNewProductMock = [[
+    { id: 1, name: 'Martelo de Thor' },
+  ]];
+
+  before(() => sinon.stub(connection, 'execute').resolves(registerNewProductMock))
+
+  afterEach(() => sinon.restore());
+
+  it('Retorna um objeto referente ao produto adicionado', () => {
+
+  });
+
+  it('O objeto retornado contém as propriedades "id" e "name"', async () => {
+    const result = await productsModel.registerNewProduct(1);
+    expect(result).to.haveOwnProperty('id');
+    expect(result).to.haveOwnProperty('name')
+  });
+});

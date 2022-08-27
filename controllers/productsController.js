@@ -38,18 +38,18 @@ const getProductById = async (request, response) => {
 };
 
 const registerNewProduct = async (request, response) => {
-  // try {
+  try {
     const { name } = request.body;
     const result = await productsService.registerNewProduct(name);
 
     return response
       .status(statusMessages.CREATED)
       .json(result);
-  // } catch (error) {
-  //   return response
-  //     .status(statusMessages.SERVER_ERROR)
-  //     .json({ message: errorMessages.INTERNAL_SERVER_ERROR });
-  // }
+  } catch (error) {
+    return response
+      .status(statusMessages.SERVER_ERROR)
+      .json({ message: errorMessages.INTERNAL_SERVER_ERROR });
+  }
 };
 
 module.exports = { getAllProducts, getProductById, registerNewProduct };
