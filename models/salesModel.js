@@ -21,7 +21,7 @@ const getSaleById = async (id) => {
   const [result] = await connection
     .execute(`SELECT
     sale.date AS date,
-    sale_product.product_id AS productIdd,
+    sale_product.product_id AS productId,
     sale_product.quantity AS quantity
 FROM
     StoreManager.sales AS sale
