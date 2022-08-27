@@ -47,3 +47,34 @@ describe('getAllSales Model', () => {
     expect(result).to.haveOwnProperty('quantity');
   });
 });
+
+describe('getSalesById Model', () => {
+  const getSalesByIdMock = [[
+    {
+      "date": "2022-08-27T21:26:12.000Z",
+      "productId": 1,
+      "quantity": 5
+    },
+    {
+      "date": "2022-08-27T21:26:12.000Z",
+      "productId": 2,
+      "quantity": 10
+    }
+  ]];
+
+  before(() => sinon.stub(connection, 'execute').resolves(getSalesByIdMock))
+  afterEach(() => sinon.restore());
+
+  it('Retorna um array', async () => {
+    const result = await salesModel.getSaleById(2);
+    expect(result).to.be.a('array');
+  });
+
+  it('O objeto retornado contém informações sobre os produtos', async () => {
+    const result = await salesModel.getSaleById(2);
+    console.log(result);
+    expect(result[0]).to.haveOwnProperty('date');
+    expect(result[0]).to.haveOwnProperty('productId');
+    expect(result[0]).to.haveOwnProperty('quantity');
+  });
+})
