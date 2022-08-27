@@ -21,7 +21,7 @@ const getSalesById = async (request, response) => {
     const { id } = request.params;
     const result = await salesService.getSaleById(id);
 
-    if (!result) {
+    if (result.length === 0) {
       return response
         .status(statusMessages.NOT_FOUND)
         .json({ message: errorMessages.SALE_NOT_FOUND });
@@ -32,8 +32,8 @@ const getSalesById = async (request, response) => {
       .json(result);
   } catch (error) {
     return response
-      .status(statusMessages.NOT_FOUND)
-      .json({ message: errorMessages.SALE_NOT_FOUND });
+      .status(statusMessages.SERVER_ERROR)
+      .json({ message: errorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
