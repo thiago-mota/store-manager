@@ -48,3 +48,36 @@ describe('getAllProducts Controller', () => {
     });
   });
 });
+
+describe('getProductById Controller', () => {
+  const request = {};
+  const response = {};
+  request.params = { id: 1 };
+
+  const resultMock = {
+    "id": 1,
+    "name": "Martelo de Thor",
+  };
+
+  response.status = sinon.stub().returns(response);
+  response.json = sinon.stub().returns();
+
+  afterEach(() => sinon.restore());
+
+  it('Retorna um produto', async () => {
+    sinon.stub(productsService, 'getProductById').resolves(resultMock)
+    await productsController.getProductById(request, response);
+
+    expect(response.status.calledWith(200)).to.be.equal(true);
+    expect(response.json.calledWith(resultMock)).to.be.equal(true);
+  });
+
+  it('Não foi possível encontrar o produto', async () => {
+    const resultMock = null;
+    sinon.stub(productsService, 'getProductById').resolves(resultMock);
+    await productsController.getProductById(request, response);
+
+    expect(response.status.calledWith(404)).to.be.equal(true);
+    expect(response.json.calledWith({ message: 'Product not found' })).to.be.equal(true);
+  });
+});

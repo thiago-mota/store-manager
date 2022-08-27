@@ -72,7 +72,6 @@ describe('getSalesById Model', () => {
 
   it('O objeto retornado contém informações sobre os produtos', async () => {
     const result = await salesModel.getSaleById(2);
-    console.log(result);
     expect(result[0]).to.haveOwnProperty('date');
     expect(result[0]).to.haveOwnProperty('productId');
     expect(result[0]).to.haveOwnProperty('quantity');
