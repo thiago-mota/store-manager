@@ -103,7 +103,7 @@ describe('deleteSale Controller', () => {
   afterEach(() => sinon.restore());
 
 
-  it('Se o produto existir', async () => {
+  it('Se a sale existir', async () => {
     request.params = { id: 1 };
     const resultMock = { xablau: 'xablau' };
     sinon.stub(salesService, 'deleteSale').resolves(resultMock);

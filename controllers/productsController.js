@@ -35,7 +35,6 @@ const registerNewProduct = async (request, response) => {
 };
 
 const deleteProduct = async (request, response) => {
-  try {
     const { id } = request.params;
     const result = await productsService.deleteProduct(id);
     console.log(result);
@@ -47,12 +46,6 @@ const deleteProduct = async (request, response) => {
     }
     return response
       .status(204).json();
-  } catch (error) {
-    console.log(error);
-    return response
-      .status(statusMessages.SERVER_ERROR)
-      .json(errorMessages.INTERNAL_SERVER_ERROR);
-  }
 };
 
 // https://stackoverflow.com/questions/68997083/get-data-of-affected-rows-after-mysql-table-update
@@ -68,7 +61,6 @@ const searchProduct = async (request, response) => {
 };
 
 const updateProduct = async (request, response) => {
-  try {
     const { id } = request.params;
     const { name } = request.body;
 
@@ -83,11 +75,6 @@ const updateProduct = async (request, response) => {
     return response
       .status(statusMessages.OK)
       .json({ id: Number(id), name });
-  } catch (error) {
-    return response
-      .status(statusMessages.SERVER_ERROR)
-      .json(errorMessages.INTERNAL_SERVER_ERROR);
-  }
 };
 
 module.exports = {

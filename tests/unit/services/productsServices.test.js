@@ -66,6 +66,14 @@ describe('deleteProduct Service', () => {
 
     expect(result).to.be.equal(true);
   });
+
+  it('O produto não existe', async () => {
+    const resultMock = { affectedRows: 0 };
+    sinon.stub(productsModel, 'deleteProduct').resolves(resultMock);
+    const result = await productsService.deleteProduct(50)
+
+    expect(result).to.be.equal(false);
+  });
 });
 
 describe('updateProduct Service', () => {
@@ -77,5 +85,14 @@ describe('updateProduct Service', () => {
     const result = await productsService.updateProduct(resultMock);
 
     expect(result).to.be.equal(true);
+  });
+
+  it('O produto não existe', async () => {
+    const resultMock = { affectedRows: 0 };
+    sinon.stub(productsModel, 'updateProduct').resolves(resultMock);
+    const result = await productsService.updateProduct({ name: 'Produto não cadastrado', id: 50 });
+    console.log(result);
+
+    expect(result).to.be.equal(false);
   });
 });

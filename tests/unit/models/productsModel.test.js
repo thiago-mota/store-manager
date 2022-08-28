@@ -66,10 +66,6 @@ describe('registerNewProduct Model', () => {
 
   afterEach(() => sinon.restore());
 
-  it('Retorna um objeto referente ao produto adicionado', () => {
-
-  });
-
   it('O objeto retornado contém as propriedades "id" e "name"', async () => {
     const result = await productsModel.registerNewProduct(1);
     expect(result).to.haveOwnProperty('id');
@@ -90,5 +86,39 @@ describe('deleteProduct Model', async () => {
     sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
     const response = await productsModel.deleteProduct(1);
     expect(response.affectedRows).to.be.equal(0);
+  });
+});
+
+describe('SearchProduct Model', () => {
+  afterEach(() => sinon.restore());
+
+  it('Retorna um objeto', async () => {
+    const resultMock = [{ id: 1, name: 'xablau' }]
+    sinon.stub(connection, 'execute').resolves(resultMock);
+
+    const result = await productsModel.searchProduct(resultMock);
+    expect(result).to.be.an('object');
+  })
+
+  it('O objeto contém as informaçÕes do produto', async () => {
+    const resultMock = [{ id: 1, name: 'xablau' }]
+    sinon.stub(connection, 'execute').resolves(resultMock);
+
+    const result = await productsModel.searchProduct(resultMock);
+
+    expect(result).to.haveOwnProperty('id');
+    expect(result).to.haveOwnProperty('name')
+  })
+});
+
+describe('updateProduct Model', () => {
+  afterEach(() => sinon.restore());
+
+  it('Retorna um objeto', async () => {
+    const resultMock = [{ id: 1, name: 'xablau' }];
+    sinon.stub(connection, 'execute').resolves(resultMock);
+    const result = await productsModel.updateProduct({ resultMock });
+
+    expect(result).to.be.an('object');
   });
 });
