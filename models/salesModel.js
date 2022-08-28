@@ -40,4 +40,4 @@ const deleteSale = async (id) => {
   return result;
 };
 
-module.exports = { getAllSales, getSaleById };
+module.exports = { getAllSales, getSaleById, deleteSale };
