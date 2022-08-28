@@ -55,3 +55,27 @@ describe('getProductsById Service', () => {
     expect(result).to.haveOwnProperty('name');
   });
 });
+
+describe('deleteProduct Service', () => {
+  afterEach(() => sinon.restore());
+
+  it('O produto é deletado', async () => {
+    const resultMock = { id: 1 };
+    sinon.stub(productsModel, 'deleteProduct').resolves(resultMock);
+    const result = await productsService.deleteProduct(1)
+
+    expect(result).to.be.equal(true);
+  });
+});
+
+describe('updateProduct Service', () => {
+  afterEach(() => sinon.restore());
+
+  it('Atualiza um produto', async () => {
+    const resultMock = { id: 1, name: 'Martelo de Thor Revoltado'};
+    sinon.stub(productsModel, 'updateProduct').resolves(resultMock);
+    const result = await productsService.updateProduct(resultMock);
+
+    expect(result).to.be.equal(true);
+  });
+});
