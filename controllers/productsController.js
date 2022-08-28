@@ -38,16 +38,17 @@ const deleteProduct = async (request, response) => {
   try {
     const { id } = request.params;
     const result = await productsService.deleteProduct(id);
+    console.log(result);
 
-    if (result.affectedRows === 0) {
+    if (result.affectedRows !== 0) {
       return response
-        .status(statusMessages.NOT_FOUND)
-        .json({ message: errorMessages.PRODUCT_NOT_FOUND });
+        .status(204).json();
     }
-
     return response
-      .status(204).json();
+      .status(statusMessages.NOT_FOUND)
+      .json({ message: errorMessages.PRODUCT_NOT_FOUND });    
   } catch (error) {
+    console.log(error);
     return response
       .status(statusMessages.SERVER_ERROR)
       .json(errorMessages.INTERNAL_SERVER_ERROR);
