@@ -35,17 +35,23 @@ const registerNewProduct = async (request, response) => {
 };
 
 const deleteProduct = async (request, response) => {
-  const { id } = request.params;
-  const result = await productsService.deleteProduct(id);
+  try {
+    const { id } = request.params;
+    const result = await productsService.deleteProduct(id);
 
-  if (result.affectedRows === 0) {
+    if (!result) {
+      return response
+        .status(statusMessages.NOT_FOUND)
+        .json({ message: errorMessages.PRODUCT_NOT_FOUND });
+    }
+
     return response
-      .status(statusMessages.NOT_FOUND)
-      .json({ message: errorMessages.PRODUCT_NOT_FOUND });
+      .status(204).json();
+  } catch (error) {
+    return response
+      .status(statusMessages.SERVER_ERROR)
+      .json(errorMessages.INTERNAL_SERVER_ERROR);
   }
-
-  return response
-    .status(204).end();
 };
 
 // https://stackoverflow.com/questions/68997083/get-data-of-affected-rows-after-mysql-table-update
