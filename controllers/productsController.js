@@ -39,7 +39,7 @@ const deleteProduct = async (request, response) => {
     const { id } = request.params;
     const result = await productsService.deleteProduct(id);
 
-    if (!result) {
+    if (result.affectedRows === 0) {
       return response
         .status(statusMessages.NOT_FOUND)
         .json({ message: errorMessages.PRODUCT_NOT_FOUND });

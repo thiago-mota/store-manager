@@ -76,3 +76,21 @@ describe('registerNewProduct Model', () => {
     expect(result).to.haveOwnProperty('name')
   });
 });
+
+// describe('deleteProduct Model', async () => {
+//   afterEach(() => sinon.restore());
+
+//   it('Se o produto não existir', async () => {
+//     const resultMock = null;
+//     const productIdMock = { id: 1 };
+//     sinon.stub(connection, 'execute').resolves(resultMock);
+
+//     const result = await productsModel.deleteProduct(productIdMock);
+//     console.log(result);
+//     expect(result).to.be.null;
+//   });
+
+  // it('Se o produto existir', async () => {
+
+  // });
+// });
