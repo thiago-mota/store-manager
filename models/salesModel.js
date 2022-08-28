@@ -34,7 +34,7 @@ WHERE
 };
 
 const deleteSale = async (id) => {
-  const result = await connection
+  const [result] = await connection
     .execute('DELETE FROM StoreManager.sales WHERE id =?;', [id]);
 
   return result;

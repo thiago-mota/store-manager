@@ -77,3 +77,19 @@ describe('getSalesById Model', () => {
     expect(result[0]).to.haveOwnProperty('quantity');
   });
 })
+
+describe('deleteSale Model', () => {
+  afterEach(() => sinon.restore());
+
+  it('A venda existe', async () => {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const response = await salesModel.deleteSale(1);
+    expect(response.affectedRows).to.be.equal(1);
+  });
+
+  it('A venda não existe', async () => {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+    const response = await salesModel.deleteSale(1);
+    expect(response.affectedRows).to.be.equal(0);
+  });
+});

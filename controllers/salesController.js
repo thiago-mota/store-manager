@@ -25,6 +25,26 @@ const getSalesById = async (request, response) => {
       .json(result);
 };
 
+// const deleteSale = async (request, response) => {
+//   try {
+//     const { id } = request.params;
+//     const result = await salesService.deleteSale(id);
+
+//     if (result.affectedRows === 0) {
+//       return response
+//         .status(statusMessages.NOT_FOUND)
+//         .json({ message: errorMessages.SALE_NOT_FOUND });
+//     }
+
+//     return response
+//       .status(204).json();
+//   } catch (error) {
+//     return response
+//       .status(statusMessages.SERVER_ERROR)
+//       .json(errorMessages.INTERNAL_SERVER_ERROR);
+//   } 
+// };
+
 const deleteSale = async (request, response) => {
   const { id } = request.params;
   const result = await salesService.deleteSale(id);

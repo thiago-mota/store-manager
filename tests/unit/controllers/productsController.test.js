@@ -100,7 +100,6 @@ describe('registerNewProduct Controller', () => {
 
   it('Retorna um produto', async () => {
     await productsController.registerNewProduct(request, response);
-    console.log(response.json);
     
     expect(response.status.calledWith(201)).to.be.equal(true);
     expect(response.json.calledWith(resultMock)).to.be.equal(true);

@@ -77,20 +77,18 @@ describe('registerNewProduct Model', () => {
   });
 });
 
-// describe('deleteProduct Model', async () => {
-//   afterEach(() => sinon.restore());
+describe('deleteProduct Model', async () => {
+  afterEach(() => sinon.restore());
 
-//   it('Se o produto não existir', async () => {
-//     const resultMock = null;
-//     const productIdMock = { id: 1 };
-//     sinon.stub(connection, 'execute').resolves(resultMock);
+  it('Se o produto existe', async () => {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const response = await productsModel.deleteProduct(1);
+    expect(response.affectedRows).to.be.equal(1);
+  });
 
-//     const result = await productsModel.deleteProduct(productIdMock);
-//     console.log(result);
-//     expect(result).to.be.null;
-//   });
-
-  // it('Se o produto existir', async () => {
-
-  // });
-// });
+  it('Se o produto não existe', async () => {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+    const response = await productsModel.deleteProduct(1);
+    expect(response.affectedRows).to.be.equal(0);
+  });
+});
