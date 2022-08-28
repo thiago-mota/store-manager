@@ -67,10 +67,34 @@ const searchProduct = async (request, response) => {
     .json(result);
 };
 
+const updateProduct = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const { name } = request.body;
+
+    const result = await productsService.updateProduct({ name, id });
+
+    if (!result) {
+      return response
+        .status(statusMessages.NOT_FOUND)
+        .json({ message: errorMessages.PRODUCT_NOT_FOUND });
+    }
+
+    return response
+      .status(statusMessages.OK)
+      .json({ id: Number(id), name });
+  } catch (error) {
+    return response
+      .status(statusMessages.SERVER_ERROR)
+      .json(errorMessages.INTERNAL_SERVER_ERROR);
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   registerNewProduct,
   deleteProduct,
   searchProduct,
+  updateProduct,
 };
