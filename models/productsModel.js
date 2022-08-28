@@ -35,4 +35,4 @@ const searchProduct = async (name) => {
   return result;
 };
 
-module.exports = { getAllProducts, getProductById, registerNewProduct, deleteProduct };
+module.exports = { getAllProducts, getProductById, registerNewProduct, deleteProduct, searchProduct };
