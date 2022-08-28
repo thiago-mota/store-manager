@@ -34,4 +34,18 @@ const registerNewProduct = async (request, response) => {
       .json(result);
 };
 
-module.exports = { getAllProducts, getProductById, registerNewProduct };
+const deleteProduct = async (request, response) => {
+  const { id } = request.params;
+  const result = await productsService.deleteProduct(id);
+
+  if (!result) {
+    return response
+      .status(statusMessages.NOT_FOUND)
+      .json({ message: errorMessages.PRODUCT_NOT_FOUND });
+  }
+
+  return response
+    .status(204).end();
+};
+
+module.exports = { getAllProducts, getProductById, registerNewProduct, deleteProduct };
