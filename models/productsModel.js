@@ -28,4 +28,4 @@ const deleteProduct = async (id) => {
   return result;
 };
 
-module.exports = { getAllProducts, getProductById, registerNewProduct };
+module.exports = { getAllProducts, getProductById, registerNewProduct, deleteProduct };
