@@ -117,12 +117,10 @@ describe('deleteProduct Controller', () => {
   const request = {};
   const response = {};
   
-  
   response.status = sinon.stub().returns(response);
   response.json = sinon.stub().returns();
   
   afterEach(() => sinon.restore());
-  
   
   it('Se o produto existir', async () => {
     request.params = { id: 1 };
@@ -141,6 +139,6 @@ describe('deleteProduct Controller', () => {
     sinon.stub(productsService, 'deleteProduct').resolves(resultMock);
     await productsController.deleteProduct(request, response);
 
-    expect(response.status.calledWith(500)).to.be.equal(true);
+    expect(response.status.calledWith(404)).to.be.equal(true);
   })
 });

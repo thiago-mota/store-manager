@@ -40,13 +40,13 @@ const deleteProduct = async (request, response) => {
     const result = await productsService.deleteProduct(id);
     console.log(result);
 
-    if (result.affectedRows !== 0) {
+    if (!result) {
       return response
-        .status(204).json();
+        .status(statusMessages.NOT_FOUND)
+        .json({ message: errorMessages.PRODUCT_NOT_FOUND });    
     }
     return response
-      .status(statusMessages.NOT_FOUND)
-      .json({ message: errorMessages.PRODUCT_NOT_FOUND });    
+      .status(204).json();
   } catch (error) {
     console.log(error);
     return response
