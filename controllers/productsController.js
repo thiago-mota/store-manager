@@ -38,7 +38,7 @@ const deleteProduct = async (request, response) => {
   const { id } = request.params;
   const result = await productsService.deleteProduct(id);
 
-  if (!result) {
+  if (result.affectedRows === 0) {
     return response
       .status(statusMessages.NOT_FOUND)
       .json({ message: errorMessages.PRODUCT_NOT_FOUND });
@@ -47,5 +47,8 @@ const deleteProduct = async (request, response) => {
   return response
     .status(204).end();
 };
+
+// https://stackoverflow.com/questions/68997083/get-data-of-affected-rows-after-mysql-table-update
+// if no rows were affected its because its ID doesnt exist.
 
 module.exports = { getAllProducts, getProductById, registerNewProduct, deleteProduct };
