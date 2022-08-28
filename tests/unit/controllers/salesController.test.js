@@ -91,3 +91,25 @@ describe('getSalesById Controller', () => {
     expect(response.json.calledWith({ message: 'Sale not found' })).to.be.equal(true)
   });
 });
+
+describe('deleteSale Controller', () => {
+  const request = {};
+  const response = {};
+
+
+  response.status = sinon.stub().returns(response);
+  response.json = sinon.stub().returns();
+
+  afterEach(() => sinon.restore());
+
+
+  it('Se o produto existir', async () => {
+    request.params = { id: 1 };
+    const resultMock = { xablau: 'xablau' };
+    sinon.stub(salesService, 'deleteSale').resolves(resultMock);
+
+    await salesController.deleteSale(request, response);
+
+    expect(response.status.calledWith(204)).to.be.equal(true);
+  });
+});
