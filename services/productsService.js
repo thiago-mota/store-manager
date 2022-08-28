@@ -11,6 +11,7 @@ const deleteProduct = async (id) => {
 };
 
 const searchProduct = async (name) => productsModel.searchProduct(name);
+const updateProduct = async (name, id) => productsModel.updateProduct(name, id);
 
 module.exports = {
   getAllProducts,
@@ -18,4 +19,5 @@ module.exports = {
   registerNewProduct,
   deleteProduct,
   searchProduct,
+  updateProduct,
 };
