@@ -73,11 +73,43 @@ describe('getProductById Controller', () => {
   });
 
   it('Não foi possível encontrar o produto', async () => {
-    const resultMock = null;
-    sinon.stub(productsService, 'getProductById').resolves(resultMock);
+    const resultNullMock = null;
+    sinon.stub(productsService, 'getProductById').resolves(resultNullMock);
     await productsController.getProductById(request, response);
 
     expect(response.status.calledWith(404)).to.be.equal(true);
     expect(response.json.calledWith({ message: 'Product not found' })).to.be.equal(true);
+  });
+});
+
+describe('registerNewProduct Controller', () => {
+  const request = {};
+  const response = {};
+  const resultMock = { id: 4, name: 'Armadura do Homem de Ferro' };
+  request.body = { name: 'Armadura do Homem de Ferro' }
+
+
+  before(() => {
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'registerNewProduct').resolves(resultMock);
+  });
+
+  afterEach(() => sinon.restore());
+
+  it('Retorna um produto', async () => {
+    await productsController.registerNewProduct(request, response);
+    console.log(response.json);
+    
+    expect(response.status.calledWith(201)).to.be.equal(true);
+    expect(response.json.calledWith(resultMock)).to.be.equal(true);
+  });
+
+  it('O produto é um objeto com as propriedades "id" e "name"', async () => {
+    await productsController.registerNewProduct(request, response);
+
+    expect(response.json).to.haveOwnProperty('id');
+    expect(response.json).to.haveOwnProperty('name');
   });
 });
