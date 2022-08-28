@@ -4,4 +4,4 @@ const getAllSales = async () => salesModel.getAllSales();
 const getSaleById = async (id) => salesModel.getSaleById(id);
 const deleteSale = async (id) => salesModel.deleteSale(id);
 
-module.exports = { getAllSales, getSaleById };
+module.exports = { getAllSales, getSaleById, deleteSale };

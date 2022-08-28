@@ -25,4 +25,18 @@ const getSalesById = async (request, response) => {
       .json(result);
 };
 
-module.exports = { getAllSales, getSalesById };
+const deleteSale = async (request, response) => {
+  const { id } = request.params;
+  const result = await salesService.deleteSale(id);
+
+  if (result.affectedRows === 0) {
+    return response
+      .status(statusMessages.NOT_FOUND)
+      .json({ message: errorMessages.SALE_NOT_FOUND });
+  }
+
+  return response
+    .status(204).json();
+};
+
+module.exports = { getAllSales, getSalesById, deleteSale };
