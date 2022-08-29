@@ -1,7 +1,15 @@
 const productsModel = require('../models/productsModel');
 
-const getAllProducts = async () => productsModel.getAllProducts();
-const getProductById = async (id) => productsModel.getProductById(id);
+const getAllProducts = async () => {
+  const getAll = await productsModel.getAllProducts();
+  return getAll;
+};
+
+const getProductById = async (id) => {
+  const getById = await productsModel.getProductById(id);
+  return getById;
+};
+
 const registerNewProduct = async (name) => productsModel.registerNewProduct(name);
 const deleteProduct = async (id) => { 
   const result = await productsModel.deleteProduct(id);
