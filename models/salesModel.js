@@ -40,4 +40,10 @@ const deleteSale = async (id) => {
   return result;
 };
 
-module.exports = { getAllSales, getSaleById, deleteSale };
+const addSale = async () => {
+  const [result] = await connection.execute('INSERT INTO StoreManager.sales ');
+
+  return result;
+};
+
+module.exports = { getAllSales, getSaleById, deleteSale, addSale };
